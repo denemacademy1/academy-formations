@@ -485,6 +485,96 @@ main { padding-bottom: 100px; }
 }
 
 /* ============================================================
+   RESSOURCES (accueil)
+   ============================================================ */
+.ressources-home {
+  margin: 32px 0 80px;
+}
+.ressources-home .ressources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+.ressource-home-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 26px 22px;
+  position: relative;
+  transition: all .25s cubic-bezier(.4, 0, .2, 1);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
+.ressource-home-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--secondary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .35s cubic-bezier(.4, 0, .2, 1);
+}
+.ressource-home-card:hover {
+  border-color: rgba(200, 255, 87, 0.4);
+  background: var(--card-hover);
+  transform: translateY(-3px);
+}
+.ressource-home-card:hover::before { transform: scaleX(1); }
+.ressource-home-icon {
+  font-size: 28px;
+  margin-bottom: 14px;
+  display: inline-block;
+  filter: drop-shadow(0 0 12px rgba(200, 255, 87, 0.25));
+}
+.ressource-home-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.ressource-home-card p {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  margin-bottom: 18px;
+  line-height: 1.55;
+  flex: 1;
+}
+.ressource-home-card-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ressource-home-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(200, 255, 87, 0.10);
+  color: var(--secondary);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 99px;
+  border: 1px solid rgba(200, 255, 87, 0.22);
+}
+.ressource-home-cta {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dim);
+  transition: color .2s, transform .2s;
+}
+.ressource-home-card:hover .ressource-home-cta {
+  color: var(--secondary);
+  transform: translateX(2px);
+}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 .site-footer {
