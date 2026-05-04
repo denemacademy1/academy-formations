@@ -1474,6 +1474,526 @@
 }
 
 /* =========================================================
+   ACTES GRID — 4 cartes colorées par acte (séance 2)
+   ========================================================= */
+.actes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 22px);
+}
+.acte-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: clamp(12px, 1.2vw, 18px);
+  padding: clamp(20px, 2.4vw, 30px);
+  position: relative;
+  overflow: hidden;
+  transition: all .3s cubic-bezier(.2, .9, .3, 1);
+  isolation: isolate;
+}
+.acte-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 4px;
+  transition: width .3s;
+}
+.acte-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(80% 60% at 100% 0%, currentColor, transparent 60%);
+  opacity: 0;
+  transition: opacity .35s;
+  pointer-events: none;
+  z-index: -1;
+}
+.acte-card[data-acte="0"]::before { background: var(--acte-0); }
+.acte-card[data-acte="1"]::before { background: var(--acte-1); }
+.acte-card[data-acte="2"]::before { background: var(--acte-2); }
+.acte-card[data-acte="3"]::before { background: var(--acte-3); }
+.acte-card[data-acte="0"] { color: rgba(107, 91, 255, 0.18); }
+.acte-card[data-acte="1"] { color: rgba(200, 255, 87, 0.10); }
+.acte-card[data-acte="2"] { color: rgba(255, 157, 92, 0.12); }
+.acte-card[data-acte="3"] { color: rgba(92, 255, 203, 0.10); }
+.acte-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  background: var(--card-hover);
+}
+.acte-card:hover::before { width: 6px; }
+.acte-card:hover::after { opacity: 1; }
+.acte-card-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.acte-card[data-acte="0"] .acte-card-num { color: var(--acte-0); }
+.acte-card[data-acte="1"] .acte-card-num { color: var(--acte-1); }
+.acte-card[data-acte="2"] .acte-card-num { color: var(--acte-2); }
+.acte-card[data-acte="3"] .acte-card-num { color: var(--acte-3); }
+.acte-card-meta {
+  font-size: 12.5px;
+  color: var(--text-mute);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  background: rgba(255,255,255,0.04);
+  padding: 2px 8px;
+  border-radius: 6px;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.acte-card-title {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: clamp(20px, 2vw, 26px);
+  letter-spacing: -0.025em;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+.acte-card-desc {
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* =========================================================
+   TIMELINE — chronologie verticale avec milestones
+   ========================================================= */
+.timeline {
+  position: relative;
+  padding-left: clamp(60px, 7vw, 100px);
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: clamp(56px, 6.4vw, 92px);
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  background: linear-gradient(180deg,
+    var(--acte-0) 0%,
+    var(--acte-1) 25%,
+    var(--acte-2) 55%,
+    var(--acte-3) 100%
+  );
+  opacity: 0.45;
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  padding-bottom: clamp(18px, 2.4vw, 30px);
+}
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-day {
+  position: absolute;
+  left: clamp(-60px, -7vw, -100px);
+  top: 6px;
+  width: clamp(50px, 5.4vw, 78px);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: clamp(13px, 1.2vw, 15px);
+  color: var(--text-dim);
+  letter-spacing: -0.01em;
+  text-align: right;
+  padding-right: 16px;
+}
+.timeline-item.is-critical .timeline-day {
+  color: var(--secondary);
+}
+.timeline-item.is-rdv .timeline-day {
+  color: var(--text);
+}
+
+.timeline-dot {
+  position: absolute;
+  left: clamp(-12px, -1vw, -8px);
+  top: 12px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid rgba(255,255,255,0.3);
+  z-index: 1;
+  transition: all .3s;
+}
+.timeline-item.is-rdv .timeline-dot {
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(107, 91, 255, 0.18);
+}
+.timeline-item.is-critical .timeline-dot {
+  background: var(--secondary);
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 6px rgba(200, 255, 87, 0.25),
+              0 0 24px rgba(200, 255, 87, 0.5);
+  width: 18px; height: 18px;
+  top: 10px;
+  animation: critical-pulse 2.4s ease-in-out infinite;
+}
+@keyframes critical-pulse {
+  0%, 100% { box-shadow: 0 0 0 6px rgba(200, 255, 87, 0.25), 0 0 24px rgba(200, 255, 87, 0.5); }
+  50% { box-shadow: 0 0 0 10px rgba(200, 255, 87, 0.10), 0 0 36px rgba(200, 255, 87, 0.7); }
+}
+
+.timeline-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  transition: all .25s;
+}
+.timeline-card:hover {
+  border-color: var(--border-strong);
+  background: var(--card-hover);
+  transform: translateX(3px);
+}
+.timeline-item.is-critical .timeline-card {
+  border-color: rgba(200, 255, 87, 0.35);
+  background: linear-gradient(135deg, rgba(200, 255, 87, 0.06), rgba(200, 255, 87, 0.02));
+}
+
+.timeline-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.timeline-pill {
+  display: inline-block;
+  font-family: 'Manrope', sans-serif;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 6px;
+  line-height: 1.4;
+}
+.timeline-pill.rdv {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+.timeline-pill.acte-0 { background: rgba(107, 91, 255, 0.14); color: var(--acte-0); }
+.timeline-pill.acte-1 { background: rgba(200, 255, 87, 0.12); color: var(--acte-1); }
+.timeline-pill.acte-2 { background: rgba(255, 157, 92, 0.14); color: var(--acte-2); }
+.timeline-pill.acte-3 { background: rgba(92, 255, 203, 0.12); color: var(--acte-3); }
+.timeline-pill.critical {
+  background: var(--secondary);
+  color: var(--bg);
+}
+
+.timeline-title {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+.timeline-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* =========================================================
+   LIVRABLES — cartes numérotées verticales
+   ========================================================= */
+.livrables-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.2vw, 14px);
+}
+.livrable-item {
+  display: grid;
+  grid-template-columns: clamp(50px, 5vw, 64px) 1fr;
+  gap: clamp(16px, 2vw, 24px);
+  align-items: start;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: clamp(18px, 2.2vw, 26px) clamp(20px, 2.4vw, 28px);
+  transition: all .3s cubic-bezier(.2, .9, .3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.livrable-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: linear-gradient(180deg, var(--secondary), var(--primary));
+  border-radius: 0 3px 3px 0;
+  transition: height .3s;
+}
+.livrable-item:hover {
+  border-color: var(--border-strong);
+  background: var(--card-hover);
+  transform: translateX(4px);
+}
+.livrable-item:hover::before { height: 60%; }
+
+.livrable-num {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: clamp(28px, 3vw, 38px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  background: linear-gradient(135deg, var(--secondary) 0%, #8effb3 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.livrable-content h3 {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 17.5px;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+  color: var(--text);
+  line-height: 1.3;
+}
+.livrable-content p {
+  font-size: 14.5px;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+
+/* =========================================================
+   RYTHME — 3 cartes avec une recommandée mise en valeur
+   ========================================================= */
+.rythme-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 22px);
+  align-items: stretch;
+}
+.rythme-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: clamp(22px, 2.6vw, 32px) clamp(20px, 2.4vw, 28px);
+  position: relative;
+  transition: all .3s;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.rythme-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-strong);
+}
+.rythme-card.is-recommended {
+  background: linear-gradient(180deg, rgba(107, 91, 255, 0.10), rgba(107, 91, 255, 0.02));
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(107, 91, 255, 0.10),
+              0 20px 50px rgba(107, 91, 255, 0.18);
+  transform: scale(1.02);
+}
+.rythme-card.is-recommended:hover {
+  transform: scale(1.02) translateY(-3px);
+}
+.rythme-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Manrope', sans-serif;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--primary), #8a7bff);
+  color: white;
+  padding: 5px 14px;
+  border-radius: 99px;
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(107, 91, 255, 0.5);
+}
+.rythme-tier {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-bottom: 12px;
+}
+.rythme-card.is-recommended .rythme-tier {
+  color: var(--primary);
+}
+.rythme-hours {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: clamp(34px, 4.4vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 4px;
+}
+.rythme-hours span {
+  font-size: 0.42em;
+  font-weight: 600;
+  color: var(--text-dim);
+  letter-spacing: -0.01em;
+  margin-left: 4px;
+}
+.rythme-card.is-recommended .rythme-hours {
+  background: linear-gradient(120deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.rythme-result {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.55;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+/* =========================================================
+   RÈGLES D'OR — 3 cartes en ligne, fortes et numérotées
+   ========================================================= */
+.regles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 20px);
+}
+.regle-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: clamp(22px, 2.4vw, 28px);
+  position: relative;
+  transition: all .3s;
+  overflow: hidden;
+}
+.regle-card::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 120px; height: 120px;
+  background: var(--primary);
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0;
+  transition: opacity .35s;
+}
+.regle-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  background: var(--card-hover);
+}
+.regle-card:hover::before { opacity: 0.18; }
+.regle-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.regle-num::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 8px var(--primary-glow);
+}
+.regle-title {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 19px;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  line-height: 1.3;
+  color: var(--text);
+}
+.regle-body {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* =========================================================
+   RESSOURCES — grille de liens
+   ========================================================= */
+.ressources-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 1.2vw, 14px);
+}
+.ressource-card {
+  display: grid;
+  grid-template-columns: 44px 1fr 22px;
+  gap: 16px;
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 22px;
+  transition: all .25s;
+  text-decoration: none;
+  color: inherit;
+}
+.ressource-card:hover {
+  border-color: var(--primary);
+  background: var(--card-hover);
+  transform: translateX(3px);
+}
+.ressource-card:hover .ressource-arrow {
+  color: var(--secondary);
+  transform: translateX(3px);
+}
+.ressource-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--primary-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.ressource-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.ressource-text strong {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text);
+}
+.ressource-text span {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.ressource-arrow {
+  color: var(--text-mute);
+  transition: all .25s;
+}
+
+/* =========================================================
    FLOATING ACTION BAR (sticky bottom-right)
    ========================================================= */
 .floating-actions {
@@ -1550,6 +2070,16 @@
 @media (max-width: 720px) {
   .raisons-grid { grid-template-columns: 1fr; }
   .profil-grid { grid-template-columns: 1fr; }
+  .actes-grid { grid-template-columns: 1fr; }
+  .rythme-grid { grid-template-columns: 1fr; }
+  .regles-grid { grid-template-columns: 1fr; }
+  .ressources-grid { grid-template-columns: 1fr; }
+
+  .rythme-card.is-recommended {
+    transform: none;
+    margin-top: 12px;
+  }
+  .rythme-card.is-recommended:hover { transform: translateY(-3px); }
 
   .vs-header { grid-template-columns: 1fr; gap: 14px; text-align: left; }
   .vs-header .vs-divider-pill { margin-left: 0; }
