@@ -48,14 +48,14 @@
    ========================================================= */
 .seance-hero-v2 {
   position: relative;
-  padding: 80px 0 60px;
+  padding: clamp(48px, 7vw, 96px) 0 clamp(36px, 5vw, 72px);
   overflow: hidden;
   isolation: isolate;
 }
 
 .hero-orbs {
   position: absolute;
-  inset: -10% -5%;
+  inset: -8% 0;
   overflow: hidden;
   pointer-events: none;
   z-index: -1;
@@ -63,28 +63,34 @@
 .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
+  filter: blur(clamp(60px, 9vw, 110px));
   will-change: transform;
 }
 .orb-1 {
-  width: 480px; height: 480px;
+  width: clamp(280px, 38vw, 560px);
+  aspect-ratio: 1;
   background: var(--primary);
-  opacity: 0.45;
-  top: -120px; left: -80px;
+  opacity: 0.42;
+  top: clamp(-140px, -10vw, -90px);
+  left: clamp(-100px, -7vw, -50px);
   animation: orb-float-a 22s ease-in-out infinite;
 }
 .orb-2 {
-  width: 360px; height: 360px;
+  width: clamp(220px, 28vw, 420px);
+  aspect-ratio: 1;
   background: var(--secondary);
   opacity: 0.18;
-  bottom: -100px; right: 5%;
+  bottom: clamp(-120px, -8vw, -60px);
+  right: clamp(2%, 5vw, 8%);
   animation: orb-float-b 26s ease-in-out infinite;
 }
 .orb-3 {
-  width: 280px; height: 280px;
+  width: clamp(180px, 22vw, 320px);
+  aspect-ratio: 1;
   background: var(--orange);
-  opacity: 0.22;
-  top: 30%; right: -60px;
+  opacity: 0.20;
+  top: 30%;
+  right: clamp(-80px, -4vw, -30px);
   animation: orb-float-c 30s ease-in-out infinite;
 }
 @keyframes orb-float-a {
@@ -247,19 +253,19 @@
    VIDEO V2 — wrapper avec glow violet
    ========================================================= */
 .video-wrap-v2 {
-  margin: 32px 0 80px;
-  border-radius: 18px;
+  margin: clamp(20px, 3vw, 36px) 0 clamp(48px, 6vw, 80px);
+  border-radius: clamp(12px, 1.4vw, 20px);
   overflow: hidden;
   background: var(--card);
   border: 1px solid var(--border);
   position: relative;
   aspect-ratio: 16 / 9;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4),
+  box-shadow: 0 clamp(18px, 3vw, 34px) clamp(40px, 6vw, 80px) rgba(0, 0, 0, 0.4),
               0 0 0 1px rgba(107, 91, 255, 0.1);
   transition: box-shadow .4s;
 }
 .video-wrap-v2:hover {
-  box-shadow: 0 40px 100px rgba(107, 91, 255, 0.25),
+  box-shadow: 0 clamp(24px, 4vw, 44px) clamp(60px, 8vw, 100px) rgba(107, 91, 255, 0.25),
               0 0 0 1px rgba(107, 91, 255, 0.3);
 }
 .video-wrap-v2 iframe {
@@ -296,10 +302,10 @@
    SECTIONS — espacement et titres
    ========================================================= */
 .section-block {
-  margin-bottom: 110px;
+  margin-bottom: clamp(64px, 8vw, 120px);
   position: relative;
 }
-.section-block:last-of-type { margin-bottom: 60px; }
+.section-block:last-of-type { margin-bottom: clamp(40px, 5vw, 60px); }
 
 .section-eyebrow {
   display: inline-block;
@@ -360,11 +366,11 @@
   position: relative;
   background: linear-gradient(135deg, rgba(107, 91, 255, 0.10) 0%, rgba(107, 91, 255, 0.02) 100%);
   border: 1px solid rgba(107, 91, 255, 0.28);
-  border-radius: 18px;
-  padding: 32px 36px;
+  border-radius: clamp(14px, 1.4vw, 20px);
+  padding: clamp(24px, 3vw, 36px);
   display: grid;
   grid-template-columns: 60px 1fr;
-  gap: 24px;
+  gap: clamp(18px, 2vw, 28px);
   align-items: start;
   overflow: hidden;
 }
@@ -408,8 +414,8 @@
    ========================================================= */
 .croyances-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 22px);
 }
 
 .croyance-card {
@@ -430,7 +436,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(360px circle at var(--mx) var(--my), rgba(107, 91, 255, 0.18), transparent 45%);
+  background: radial-gradient(60% 60% at var(--mx) var(--my), rgba(107, 91, 255, 0.20), transparent 65%);
   opacity: 0;
   transition: opacity .35s;
   pointer-events: none;
@@ -515,8 +521,8 @@
 .vs-wrap {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 36px;
+  border-radius: clamp(14px, 1.6vw, 22px);
+  padding: clamp(22px, 3vw, 40px);
   position: relative;
   overflow: hidden;
 }
@@ -611,8 +617,8 @@
    ========================================================= */
 .raisons-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 22px);
 }
 .raison-card {
   background: var(--card);
@@ -736,7 +742,7 @@
 .tabs-wrap {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: clamp(14px, 1.4vw, 20px);
   overflow: hidden;
 }
 .tabs-nav {
@@ -784,7 +790,7 @@
 }
 .tab-btn.active .pill { background: var(--primary); color: white; }
 
-.tab-panels { padding: 32px 36px; min-height: 220px; }
+.tab-panels { padding: clamp(22px, 3vw, 38px); min-height: 220px; }
 .tab-panel { display: none; }
 .tab-panel.active {
   display: block;
@@ -848,8 +854,8 @@
 /* Cards profils */
 .profil-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 20px);
 }
 .profil-card {
   background: var(--card);
@@ -915,17 +921,19 @@
   position: relative;
   background: linear-gradient(135deg, rgba(255, 157, 92, 0.05), rgba(255, 157, 92, 0.01));
   border: 1px solid rgba(255, 157, 92, 0.22);
-  border-radius: 22px;
-  padding: 40px;
+  border-radius: clamp(14px, 1.8vw, 24px);
+  padding: clamp(24px, 3.4vw, 44px);
   overflow: hidden;
 }
 .exercice-wrap::before {
   content: '';
   position: absolute;
-  top: -100px; right: -100px;
-  width: 300px; height: 300px;
+  top: clamp(-120px, -8vw, -60px);
+  right: clamp(-120px, -8vw, -60px);
+  width: clamp(220px, 28vw, 360px);
+  aspect-ratio: 1;
   background: var(--orange);
-  filter: blur(120px);
+  filter: blur(clamp(80px, 11vw, 140px));
   opacity: 0.15;
   border-radius: 50%;
   pointer-events: none;
@@ -1161,18 +1169,20 @@
 .quizz-wrap {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 32px 36px;
+  border-radius: clamp(14px, 1.6vw, 22px);
+  padding: clamp(22px, 3vw, 38px);
   position: relative;
   overflow: hidden;
 }
 .quizz-wrap::before {
   content: '';
   position: absolute;
-  top: -120px; left: -80px;
-  width: 320px; height: 320px;
+  top: clamp(-140px, -9vw, -80px);
+  left: clamp(-100px, -6vw, -50px);
+  width: clamp(220px, 28vw, 380px);
+  aspect-ratio: 1;
   background: var(--primary);
-  filter: blur(140px);
+  filter: blur(clamp(90px, 12vw, 150px));
   opacity: 0.10;
   border-radius: 50%;
   pointer-events: none;
@@ -1535,6 +1545,9 @@
    ========================================================= */
 @media (max-width: 920px) {
   .croyances-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
   .raisons-grid { grid-template-columns: 1fr; }
   .profil-grid { grid-template-columns: 1fr; }
 
