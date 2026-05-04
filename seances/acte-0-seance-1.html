@@ -4,13 +4,17 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Acte 0 · Séance 1 — Le mindset du freelance qui réussit · DENEM Academy</title>
-<meta name="description" content="80% des freelances qui échouent ne plantent pas sur la technique. Ils plantent sur la tête." />
+<meta name="description" content="80% des freelances qui échouent ne plantent pas sur la technique. Ils plantent sur la tête. Trois changements mentaux non négociables avant de toucher un seul outil IA." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;700&family=Syne:wght@700;800&display=swap" />
 <link rel="stylesheet" href="../assets/styles.css" />
+<link rel="stylesheet" href="../assets/seance.css" />
 </head>
-<body data-seance-id="acte-0-seance-1">
+<body data-seance-id="acte-0-seance-1" class="seance-page">
+
+<!-- Scroll progress -->
+<div class="scroll-progress"><div class="scroll-progress-fill"></div></div>
 
 <header class="site-header">
   <div class="header-inner">
@@ -25,8 +29,18 @@
 </header>
 
 <main>
-  <section class="container seance-hero">
-    <div class="breadcrumb">
+
+  <!-- ======================================================
+       HERO
+       ====================================================== -->
+  <section class="container seance-hero-v2">
+    <div class="hero-orbs" aria-hidden="true">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+
+    <div class="breadcrumb" data-reveal>
       <a href="../">Programme</a>
       <span class="sep">/</span>
       <span>Acte 0</span>
@@ -34,219 +48,531 @@
       <span class="crumb-current">Séance 1</span>
     </div>
 
-    <div style="margin-top: 22px;">
-      <span class="seance-acte-tag">Acte 0 · Démarrage</span>
-    </div>
-    <h1>Le mindset du freelance qui réussit</h1>
-    <p class="seance-accroche">80% des freelances qui échouent ne plantent pas sur la technique. Ils plantent sur la tête.</p>
-
-    <div class="seance-meta-row">
-      <div class="item">
-        <span class="label">Durée</span>
-        <span>25 min</span>
-      </div>
-      <div class="item">
-        <span class="label">Animée par</span>
-        <span>Axel</span>
-      </div>
-      <div class="item">
-        <span class="label">Format</span>
-        <span>Vidéo + exercice</span>
-      </div>
+    <div style="margin-top: 22px;" data-reveal data-reveal-delay="80">
+      <span class="hero-acte-tag">Acte 0 · Démarrage</span>
     </div>
 
-    <a href="#" class="cta-btn" id="video-cta" target="_blank" rel="noopener">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      Voir la vidéo
-    </a>
+    <h1 class="hero-title" data-reveal data-reveal-delay="160">Le mindset du freelance qui réussit</h1>
+
+    <p class="hero-accroche" data-reveal data-reveal-delay="260">
+      80% des freelances qui échouent ne plantent pas sur la technique. Ils plantent sur la tête.
+    </p>
+
+    <div class="hero-meta-row" data-reveal data-reveal-delay="340">
+      <span class="hero-meta-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <strong>25 min</strong>
+      </span>
+      <span class="hero-meta-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Animée par <strong>Axel</strong>
+      </span>
+      <span class="hero-meta-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        Vidéo + exercice
+      </span>
+    </div>
+
+    <div data-reveal data-reveal-delay="420">
+      <a href="#video" class="cta-glow">
+        <span class="play-circle">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        Voir la vidéo
+      </a>
+    </div>
   </section>
 
-  <section class="container">
-    <div class="video-wrap">
+  <!-- ======================================================
+       VIDEO
+       ====================================================== -->
+  <section class="container" id="video">
+    <div class="video-wrap-v2" data-reveal>
       <!-- Remplacer par <iframe src="URL_TELLA" allow="autoplay; fullscreen" allowfullscreen></iframe> -->
-      <div class="video-placeholder">
+      <div class="video-placeholder-v2">
         <div class="play-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
         </div>
         <p>Vidéo Tella à intégrer ici</p>
       </div>
     </div>
+  </section>
 
-    <div class="seance-layout">
-      <div class="seance-content">
-        <article id="fiche" class="fiche">
-          <!-- Contenu rendu depuis le markdown ci-dessous -->
-        </article>
-
-        <nav class="seance-nav">
-          <a href="../" class="nav-card" data-disabled="true">
-            <span class="nav-direction">← Séance précédente</span>
-            <span class="nav-card-title">Aucune — début du parcours</span>
-          </a>
-          <a href="../" class="nav-card nav-next">
-            <span class="nav-direction">Séance suivante →</span>
-            <span class="nav-card-title">Comprendre le marché des TPE/PME françaises</span>
-          </a>
-        </nav>
+  <!-- ======================================================
+       À RETENIR
+       ====================================================== -->
+  <section class="container section-block" data-reveal>
+    <div class="callout-retenir-v2">
+      <div class="callout-icon-wrap">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"><polygon points="12 2 15 9 22 10 17 15 18 22 12 19 6 22 7 15 2 10 9 9 12 2"/></svg>
       </div>
-
-      <aside class="seance-sidebar">
-        <div class="toc">
-          <div class="toc-title">Sommaire</div>
-          <ul></ul>
-        </div>
-        <div class="sidebar-actions">
-          <button class="sidebar-btn btn-mark-seen" id="btn-mark-seen">
-            <span class="left">
-              <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span class="label">Marquer comme vu</span>
-            </span>
-          </button>
-          <a href="#" class="sidebar-btn">
-            <span class="left">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Télécharger le PDF
-            </span>
-          </a>
-          <a href="#" class="sidebar-btn">
-            <span class="left">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-              Discuter sur Slack #acte-0
-            </span>
-          </a>
-        </div>
-      </aside>
+      <div class="callout-content">
+        <div class="label">À retenir de cette séance</div>
+        <p>Trois changements mentaux non négociables avant de toucher un seul outil IA. Une grille pour identifier ce qui te paralyse en ce moment. Un exercice court à faire sur papier pour ancrer le shift dès aujourd'hui. Un cadre honnête sur ce que DENEM s'engage à livrer et sur ta part de responsabilité.</p>
+      </div>
     </div>
   </section>
+
+  <!-- ======================================================
+       LES 3 CROYANCES
+       ====================================================== -->
+  <section class="container section-block">
+    <div data-reveal>
+      <span class="section-eyebrow">Mindset · Partie 1</span>
+      <h2 class="section-title">Les 3 croyances qui tuent un freelance <span class="grad">avant qu'il commence</span></h2>
+    </div>
+
+    <div class="croyances-grid">
+
+      <article class="croyance-card" data-reveal data-reveal-delay="80">
+        <div class="croyance-num">01</div>
+        <div class="croyance-belief">"Je dois être expert avant de me lancer"</div>
+        <div class="croyance-truth">
+          <span class="truth-label">La vérité</span>
+          Tu deviens expert <strong style="color:#fff">en te lançant</strong>, pas avant.
+        </div>
+        <div class="croyance-proof">
+          <strong>Baptiste</strong> facturait <span class="stat">0€</span> il y a 18 mois.<br />
+          Aujourd'hui : <span class="stat" data-counter data-from="0" data-to="35000" data-suffix=" €">0 €</span> / mois.<br />
+          Il a appris en livrant — pas avant.
+        </div>
+      </article>
+
+      <article class="croyance-card" data-reveal data-reveal-delay="180">
+        <div class="croyance-num">02</div>
+        <div class="croyance-belief">"Le marché est saturé, j'arrive trop tard"</div>
+        <div class="croyance-truth">
+          <span class="truth-label">La vérité</span>
+          Tu n'arrives pas tard. Tu arrives <strong style="color:#fff">au début</strong>.
+        </div>
+        <div class="croyance-proof">
+          <span class="stat" data-counter data-from="0" data-to="73" data-suffix=" %">0 %</span> des PME françaises veulent intégrer l'IA en 2026.<br />
+          Moins de <span class="stat" data-counter data-from="0" data-to="3" data-suffix=" %">0 %</span> des actifs sont formés à la déployer.
+        </div>
+      </article>
+
+      <article class="croyance-card" data-reveal data-reveal-delay="280">
+        <div class="croyance-num">03</div>
+        <div class="croyance-belief">"Je n'ai pas le profil pour entreprendre"</div>
+        <div class="croyance-truth">
+          <span class="truth-label">La vérité</span>
+          Le profil n'existe pas. <strong style="color:#fff">C'est une excuse</strong> pour ne pas commencer.
+        </div>
+        <div class="croyance-proof">
+          <strong>Joseph</strong> était professeur de mathématiques.<br />
+          Aujourd'hui consultant IA Freelance — DENEM Network.
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SALARIE VS FREELANCE
+       ====================================================== -->
+  <section class="container section-block">
+    <div data-reveal>
+      <span class="section-eyebrow">Mindset · Partie 2</span>
+      <h2 class="section-title">Salarié <span class="grad">vs</span> Freelance</h2>
+      <p class="section-sub">Les 5 différences mentales qui changent tout.</p>
+    </div>
+
+    <div class="vs-wrap" data-reveal>
+      <div class="vs-header">
+        <div class="vs-header-side left">Salarié</div>
+        <div class="vs-divider-pill">VS</div>
+        <div class="vs-header-side right">Freelance</div>
+      </div>
+      <div class="vs-rows">
+        <div class="vs-row">
+          <div class="vs-side left">Vend son temps</div>
+          <div class="vs-arrow">→</div>
+          <div class="vs-side right">Vend des résultats</div>
+        </div>
+        <div class="vs-row">
+          <div class="vs-side left">L'argent est un dû mensuel</div>
+          <div class="vs-arrow">→</div>
+          <div class="vs-side right">L'argent est conséquence de la valeur livrée</div>
+        </div>
+        <div class="vs-row">
+          <div class="vs-side left">Déteste le refus</div>
+          <div class="vs-arrow">→</div>
+          <div class="vs-side right">Vit dans le refus</div>
+        </div>
+        <div class="vs-row">
+          <div class="vs-side left">Validé par son manager</div>
+          <div class="vs-arrow">→</div>
+          <div class="vs-side right">Seul juge de son travail</div>
+        </div>
+        <div class="vs-row">
+          <div class="vs-side left">Exécute des décisions</div>
+          <div class="vs-arrow">→</div>
+          <div class="vs-side right">Prend 50 décisions par jour</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       4 RAISONS D'ECHEC (accordion)
+       ====================================================== -->
+  <section class="container section-block">
+    <div data-reveal>
+      <span class="section-eyebrow">Mindset · Partie 3</span>
+      <h2 class="section-title">Les 4 raisons d'échec — <span class="grad-orange">et comment les éviter</span></h2>
+      <p class="section-sub">Clique sur une carte pour révéler la règle qui te protège.</p>
+    </div>
+
+    <div class="raisons-grid">
+
+      <article class="raison-card" data-reveal data-reveal-delay="60">
+        <div class="raison-head">
+          <div class="raison-num">01</div>
+          <div class="raison-title">Le syndrome du parfait</div>
+          <div class="raison-toggle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="raison-body">
+          <p class="raison-desc">Ils peaufinent leur logo 6 mois au lieu de chercher leur premier client.</p>
+          <div class="raison-rule">
+            <span class="rule-arrow">→</span>
+            <span><span class="rule-label">Règle :</span> <em>Fait vaut mieux que parfait.</em></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="raison-card" data-reveal data-reveal-delay="120">
+        <div class="raison-head">
+          <div class="raison-num">02</div>
+          <div class="raison-title">La peur de vendre</div>
+          <div class="raison-toggle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="raison-body">
+          <p class="raison-desc">Ils maîtrisent la technique mais s'excusent de facturer.</p>
+          <div class="raison-rule">
+            <span class="rule-arrow">→</span>
+            <span><span class="rule-label">Règle :</span> <em>La vente s'apprend. C'est la compétence n°1, avant la technique.</em></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="raison-card" data-reveal data-reveal-delay="180">
+        <div class="raison-head">
+          <div class="raison-num">03</div>
+          <div class="raison-title">Le yo-yo de l'acquisition</div>
+          <div class="raison-toggle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="raison-body">
+          <p class="raison-desc">Ils prospectent quand ils sont vides, arrêtent quand ils ont un client.</p>
+          <div class="raison-rule">
+            <span class="rule-arrow">→</span>
+            <span><span class="rule-label">Règle :</span> <em>1h de prospection par jour minimum, en permanence.</em></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="raison-card" data-reveal data-reveal-delay="240">
+        <div class="raison-head">
+          <div class="raison-num">04</div>
+          <div class="raison-title">L'isolement</div>
+          <div class="raison-toggle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="raison-body">
+          <p class="raison-desc">Pas de communauté, pas de mentor. Au premier coup dur ils décrochent.</p>
+          <div class="raison-rule">
+            <span class="rule-arrow">→</span>
+            <span><span class="rule-label">Règle :</span> <em>DENEM Academy est un programme communautaire — tu progresses avec tes pairs.</em></span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ======================================================
+       LE CADRE HONNETE (tabs)
+       ====================================================== -->
+  <section class="container section-block">
+    <div data-reveal>
+      <span class="section-eyebrow">Engagements</span>
+      <h2 class="section-title">Le cadre <span class="grad">honnête</span></h2>
+      <p class="section-sub">Ce que DENEM s'engage à livrer · ce qui dépend exclusivement de toi.</p>
+    </div>
+
+    <div class="tabs-wrap" data-reveal>
+      <div class="tabs-nav" data-active="denem">
+        <button class="tab-btn active" data-tab="denem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Ce que DENEM livre
+          <span class="pill">5</span>
+        </button>
+        <button class="tab-btn" data-tab="toi">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+          Ce qui dépend de toi
+          <span class="pill">4</span>
+        </button>
+      </div>
+      <div class="tab-panels">
+        <div class="tab-panel active" data-tab="denem">
+          <ul class="check-list">
+            <li>
+              <span class="check-icon-li">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              Une méthode structurée sur 90 jours
+            </li>
+            <li>
+              <span class="check-icon-li">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              Les outils et templates concrets
+            </li>
+            <li>
+              <span class="check-icon-li">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              7 RDVs d'accompagnement individuel
+            </li>
+            <li>
+              <span class="check-icon-li">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              Une communauté active 7j/7
+            </li>
+            <li>
+              <span class="check-icon-li">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              L'accès au réseau DENEM Group
+            </li>
+          </ul>
+        </div>
+        <div class="tab-panel" data-tab="toi">
+          <ul class="cross-list">
+            <li>
+              <span class="cross-icon-li">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </span>
+              Ton revenu final (variable selon secteur, réseau, marché)
+            </li>
+            <li>
+              <span class="cross-icon-li">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </span>
+              Le délai de ta première signature (variable selon ton intensité)
+            </li>
+            <li>
+              <span class="cross-icon-li">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </span>
+              Ton engagement quotidien
+            </li>
+            <li>
+              <span class="cross-icon-li">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </span>
+              Ta capacité à appliquer la méthode
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <blockquote class="quote-strong" data-reveal>
+      Tout formateur qui te promet un revenu garanti te ment.<br />
+      <span class="grad">La méthode marche — quand elle est appliquée.</span>
+    </blockquote>
+
+    <h3 class="section-subtitle" data-reveal>Ce qu'on observe sur le réseau DENEM</h3>
+
+    <div class="profil-grid">
+      <div class="profil-card profil-engage" data-reveal data-reveal-delay="60">
+        <div class="profil-name">Profil engagé</div>
+        <div class="profil-hours">15h+ / sem</div>
+        <div class="profil-prob">
+          <span class="big" data-counter data-from="0" data-to="70" data-suffix=" %">0 %</span>
+          de probabilité de signature entre J60 et J90.
+        </div>
+      </div>
+      <div class="profil-card profil-regulier" data-reveal data-reveal-delay="160">
+        <div class="profil-name">Profil régulier</div>
+        <div class="profil-hours">10h / sem</div>
+        <div class="profil-prob">
+          <span class="big" data-counter data-from="0" data-to="50" data-suffix=" %">0 %</span>
+          entre J90 et J120.
+        </div>
+      </div>
+      <div class="profil-card profil-minimal" data-reveal data-reveal-delay="260">
+        <div class="profil-name">Profil minimal</div>
+        <div class="profil-hours">5h / sem</div>
+        <div class="profil-prob">
+          <span class="big">Plus rare</span>
+          avant J120.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       EXERCICE
+       ====================================================== -->
+  <section class="container section-block">
+    <div class="exercice-wrap" data-reveal>
+      <div class="exercice-header">
+        <span class="exercice-pill">Exercice de la séance</span>
+        <h2>15 minutes sur papier</h2>
+      </div>
+
+      <div class="steps-container">
+
+        <div class="step-card" data-step="1">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Tes 3 plus grosses peurs</h3>
+            <p>Sur une feuille blanche (<strong>pas ton téléphone</strong>), écris en haut :</p>
+            <em>"Mes 3 plus grosses peurs par rapport à ce projet."</em>
+            <p>Sans filtrer. Vraiment.</p>
+          </div>
+        </div>
+
+        <div class="step-card" data-step="2">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Le pire scénario réel</h3>
+            <p>Pour chaque peur, écris ce qui se passerait <strong>concrètement</strong> dans le pire scénario.</p>
+            <p>Si tu échoues complètement et reviens à ton job actuel après 6 mois — qu'est-ce que tu auras vraiment perdu ?</p>
+          </div>
+        </div>
+
+        <div class="step-card" data-step="3">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Ton engagement 90 jours</h3>
+            <p>Une phrase. Pas molle. Exemple :</p>
+            <em>"Je consacre 10h/semaine minimum au programme et je m'engage à appliquer la méthode jusqu'au bout."</em>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="exercice-footer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span><strong>Garde cette feuille.</strong> Tu la reliras à J30, J60 et J90.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       3 ACTIONS — checklist interactive
+       ====================================================== -->
+  <section class="container section-block">
+    <div data-reveal>
+      <span class="section-eyebrow">Avant la séance 2</span>
+      <h2 class="section-title">Tes <span class="grad">3 actions</span> à faire maintenant</h2>
+      <p class="section-sub">Coche au fur et à mesure. Quand les 3 sont faites, la séance est marquée comme vue automatiquement.</p>
+    </div>
+
+    <div class="actions-checklist">
+
+      <label class="action-item" data-action-id="action-1" data-reveal data-reveal-delay="60">
+        <input type="checkbox" />
+        <span class="action-check">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <div class="action-content">
+          <strong>Faire l'exercice papier</strong>
+          <span>15 minutes, maintenant.</span>
+        </div>
+        <span class="action-num">01</span>
+      </label>
+
+      <label class="action-item" data-action-id="action-2" data-reveal data-reveal-delay="140">
+        <input type="checkbox" />
+        <span class="action-check">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <div class="action-content">
+          <strong>Poster ton engagement dans le chat avec ton coach</strong>
+          <span>Phrase 1 ligne, sans excuse.</span>
+        </div>
+        <span class="action-num">02</span>
+      </label>
+
+      <label class="action-item" data-action-id="action-3" data-reveal data-reveal-delay="220">
+        <input type="checkbox" />
+        <span class="action-check">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <div class="action-content">
+          <strong>Lancer la séance 2 dans les 24 heures</strong>
+          <span>Le rythme se prend dans les 3 premiers jours, ou jamais.</span>
+        </div>
+        <span class="action-num">03</span>
+      </label>
+
+    </div>
+
+    <div class="actions-progress">
+      <span>Ta progression sur cette séance</span>
+      <div class="actions-progress-bar"><div class="actions-progress-bar-fill"></div></div>
+      <span class="actions-progress-count">0 / 3 fait</span>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       NAV BAS
+       ====================================================== -->
+  <section class="container">
+    <nav class="seance-nav">
+      <a href="../" class="nav-card" data-disabled="true">
+        <span class="nav-direction">← Séance précédente</span>
+        <span class="nav-card-title">Aucune — début du parcours</span>
+      </a>
+      <a href="../" class="nav-card nav-next">
+        <span class="nav-direction">Séance suivante →</span>
+        <span class="nav-card-title">Comprendre le marché des TPE/PME françaises</span>
+      </a>
+    </nav>
+  </section>
+
 </main>
+
+<!-- Floating action bar (sticky bottom-right) -->
+<div class="floating-actions">
+  <button class="float-btn float-btn-mark">
+    <span class="pending-icon">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+    </span>
+    <span class="check-icon">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </span>
+    <span class="label">Marquer comme vu</span>
+  </button>
+  <button class="float-btn float-btn-top" title="Retour en haut">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+  </button>
+</div>
 
 <footer class="site-footer">
   <div class="footer-inner">
     <span>DENEM Academy · Une entité du Groupe DENEM</span>
     <nav class="footer-links">
       <a href="../">Retour au programme</a>
-      <a href="#">Slack</a>
+      <a href="#">Slack #acte-0</a>
       <a href="mailto:contact@denemacademy.fr">Support</a>
     </nav>
     <span>© 2026</span>
   </div>
 </footer>
 
-<!-- Contenu markdown de la séance -->
-<script type="text/markdown" id="seance-markdown">
-# Le mindset du freelance qui réussit
-
-> 80% des freelances qui échouent ne plantent pas sur la technique. Ils plantent sur la tête.
-
-## À retenir de cette séance
-
-Trois changements mentaux non négociables avant de toucher un seul outil IA. Une grille pour identifier ce qui te paralyse en ce moment. Un exercice court à faire sur papier pour ancrer le shift dès aujourd'hui. Un cadre honnête sur ce que DENEM s'engage à livrer et sur ta part de responsabilité.
-
----
-
-## Les 3 croyances qui tuent un freelance avant qu'il commence
-
-**Croyance 1 — "Je dois être expert avant de me lancer"**
-
-Tu deviens expert en te lançant, pas avant. Baptiste facturait 0€ il y a 18 mois. Aujourd'hui 35 000€/mois. Il a appris en livrant — pas avant.
-
-**Croyance 2 — "Le marché est saturé, j'arrive trop tard"**
-
-73% des PME françaises veulent intégrer l'IA en 2026 sans savoir comment. Moins de 3% des actifs sont formés à la déployer. Tu n'arrives pas tard. Tu arrives au début.
-
-**Croyance 3 — "Je n'ai pas le profil pour entreprendre"**
-
-Le profil n'existe pas. Joseph était professeur de mathématiques. Le profil c'est une excuse pour ne pas commencer.
-
----
-
-## Salarié vs Freelance — les 5 différences mentales
-
-| Salarié | Freelance |
-|---------|-----------|
-| Vend son temps | Vend des résultats |
-| L'argent est un dû mensuel | L'argent est conséquence de la valeur livrée |
-| Déteste le refus | Vit dans le refus |
-| Validé par son manager | Seul juge de son travail |
-| Exécute des décisions | Prend 50 décisions par jour |
-
----
-
-## Les 4 raisons d'échec — et comment les éviter
-
-**1. Le syndrome du parfait**
-Ils peaufinent leur logo 6 mois au lieu de chercher leur premier client.
-→ Règle : *Fait vaut mieux que parfait.*
-
-**2. La peur de vendre**
-Ils maîtrisent la technique mais s'excusent de facturer.
-→ Règle : *La vente s'apprend. C'est la compétence n°1, avant la technique.*
-
-**3. Le yo-yo de l'acquisition**
-Ils prospectent quand ils sont vides, arrêtent quand ils ont un client.
-→ Règle : *1h de prospection par jour minimum, en permanence.*
-
-**4. L'isolement**
-Pas de communauté, pas de mentor. Au premier coup dur ils décrochent.
-→ Règle : *DENEM Academy est un programme communautaire — tu progresses avec tes pairs.*
-
----
-
-## Le cadre honnête — engagements et responsabilités
-
-**Ce que DENEM Academy s'engage à te livrer**
-
-- Une méthode structurée sur 90 jours
-- Les outils et templates concrets
-- 7 RDVs d'accompagnement individuel
-- Une communauté active 7j/7
-- L'accès au réseau DENEM Group
-
-**Ce qui dépend exclusivement de toi**
-
-- Ton revenu final (variable selon secteur, réseau, marché)
-- Le délai de ta première signature (variable selon ton intensité)
-- Ton engagement quotidien
-- Ta capacité à appliquer la méthode
-
-> Tout formateur qui te promet un revenu garanti te ment. La méthode marche — quand elle est appliquée.
-
-**Ce qu'on observe sur le réseau DENEM**
-
-| Profil | Heures/semaine | Probabilité de signature |
-|--------|----------------|--------------------------|
-| Engagé | 15h+ | ~70% entre J60 et J90 |
-| Régulier | 10h | ~50% entre J90 et J120 |
-| Minimal | 5h | Plus rare avant J120 |
-
----
-
-## Exercice de la séance — 15 minutes sur papier
-
-**Étape 1 — Tes 3 plus grosses peurs**
-Sur une feuille blanche (pas ton téléphone), écris en haut :
-*"Mes 3 plus grosses peurs par rapport à ce projet."*
-Sans filtrer. Vraiment.
-
-**Étape 2 — Le pire scénario réel**
-Pour chaque peur, écris ce qui se passerait concrètement dans le pire scénario. Si tu échoues complètement et reviens à ton job actuel après 6 mois — qu'est-ce que tu auras vraiment perdu ?
-
-**Étape 3 — Ton engagement 90 jours**
-Une phrase. Pas molle.
-Exemple : *"Je consacre 10h/semaine minimum au programme et je m'engage à appliquer la méthode jusqu'au bout."*
-
-> Garde cette feuille. Tu la reliras à J30, J60 et J90.
-
----
-
-## Tes 3 actions avant la séance 2
-
-1. **Faire l'exercice papier** — 15 minutes, maintenant.
-2. **Poster ton engagement dans le chat avec ton coach.**
-3. **Lancer la séance 2 dans les 24 heures** — le rythme se prend dans les 3 premiers jours, ou jamais.
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
 <script src="../assets/script.js"></script>
+<script src="../assets/seance.js"></script>
 </body>
 </html>

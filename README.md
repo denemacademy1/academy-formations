@@ -1,8 +1,16 @@
 # DENEM Academy — Fiches de formation
 
-Site statique hébergeant les fiches de cours du programme DENEM Academy : 27 séances réparties en 4 actes pour former des freelances Experts IA en 90 jours.
+Site statique GitHub Pages hébergeant les fiches de cours du programme DENEM Academy : 27 séances en 4 actes pour former des freelances Experts IA en 90 jours.
 
-URL de production (GitHub Pages) : `https://denemacademy1.github.io/academy-formations/`
+URL prod : https://denemacademy1.github.io/academy-formations/
+
+---
+
+## Philosophie
+
+**Chaque séance = sa propre page bespoke.** Pas de template générique : chaque page séance est conçue à la main avec ses cartes interactives, ses animations et ses composants riches, pensée pour être présentée en vidéo (screen recording).
+
+L'index liste les 27 séances avec une barre de progression sauvegardée en `localStorage`.
 
 ---
 
@@ -10,69 +18,85 @@ URL de production (GitHub Pages) : `https://denemacademy1.github.io/academy-form
 
 ```
 .
-├── index.html                       # page d'accueil + liste des 27 séances
+├── index.html                       # accueil + 27 cartes séance + progression
 ├── assets/
-│   ├── styles.css                   # design system commun
-│   └── script.js                    # progression localStorage, TOC, rendu markdown
+│   ├── styles.css                   # design system commun (header, accueil, footer)
+│   ├── script.js                    # progression localStorage + checkboxes index
+│   ├── seance.css                   # composants bespoke des pages séance
+│   └── seance.js                    # interactivité bespoke (accordion, tabs, counters, etc.)
 ├── seances/
-│   └── acte-0-seance-1.html         # une page par séance disponible
+│   └── acte-0-seance-1.html         # une page bespoke par séance disponible
 └── README.md
 ```
 
-- HTML/CSS/JS pur — pas de build, pas de framework.
-- Le contenu de chaque séance est embarqué en markdown dans une balise `<script type="text/markdown">` et rendu côté client avec [marked.js](https://github.com/markedjs/marked).
-- La progression de l'apprenant est stockée localement (`localStorage`, clé `denem-progress`).
+- HTML/CSS/JS pur. Pas de build, pas de framework.
+- Polices : **Manrope** (titres séance, plus lisible) · **DM Sans** (corps) · **Syne** (logo brand).
 
 ---
 
-## Déploiement (GitHub Pages)
+## Composants interactifs disponibles (à réutiliser pour les futures séances)
 
-1. Pousser sur la branche `main`.
-2. Dans Settings → Pages : sélectionner *Deploy from branch* → `main` / `/` (root).
-3. Le site est servi sur `https://denemacademy1.github.io/academy-formations/`.
+Vois `seances/acte-0-seance-1.html` comme la référence canonique. Tous les composants ci-dessous sont stylés dans `assets/seance.css` et hydratés par `assets/seance.js`.
+
+| Composant | Classe principale | Utilité |
+|-----------|-------------------|---------|
+| Hero animé avec orbs flottants + titre dégradé | `.seance-hero-v2` + `.hero-title` | Ouverture impactante |
+| Scroll progress bar (top) | `.scroll-progress` | Indique la progression dans la lecture |
+| Callout "À retenir" premium | `.callout-retenir-v2` | Synthèse en haut de fiche |
+| Cartes "Croyances / concepts" | `.croyance-card` | 2 à 4 cartes en grille, magnetic hover |
+| Compteur animé au scroll | `[data-counter data-from data-to data-suffix]` | Stats qui s'animent (€, %, etc.) |
+| Comparaison "VS" | `.vs-wrap` + `.vs-row` | Avant/après, problème/solution |
+| Accordion expandable | `.raison-card` | Liste de points à dévoiler au clic |
+| Tabs (panels) | `.tabs-wrap` + `.tabs-nav` + `.tab-panel` | Comparaison de 2 ou 3 facettes |
+| Listes check / cross | `.check-list` / `.cross-list` | Engagements, exclusions |
+| Quote forte | `.quote-strong` | Punchline avec dégradé |
+| Cards profils/tiers | `.profil-card` | Tableaux de profils en cartes |
+| Steps interactifs (exercice) | `.exercice-wrap` + `.step-card` | Exercice à étapes avec auto-highlight au scroll |
+| Checklist actions sauvegardée | `.action-item` | Auto-mark séance vue + confetti |
+| Floating action bar (bottom) | `.floating-actions` | "Marquer comme vu" + retour haut |
+| Texte avec dégradé animé | `<span class="grad">…</span>` ou `.grad-orange` | Surlignage de mots clés |
+| Reveal stagger au scroll | `[data-reveal data-reveal-delay="120"]` | Apparition progressive |
 
 ---
 
 ## Ajouter une nouvelle séance
 
-1. **Dupliquer le template** :
+1. **Dupliquer la page de référence** :
    ```bash
    cp seances/acte-0-seance-1.html seances/acte-0-seance-2.html
    ```
 
-2. **Mettre à jour les éléments suivants dans le nouveau fichier** :
+2. **Mettre à jour les éléments globaux** :
    - `<title>` et `<meta name="description">`
-   - `<body data-seance-id="acte-X-seance-Y">`
-   - Le breadcrumb (`Séance 2`)
-   - Le badge `<span class="seance-acte-tag">` (si autre acte)
-   - Le `<h1>` titre + `<p class="seance-accroche">` accroche
-   - Les métadonnées (durée, animateur, format)
-   - Le lien vidéo (`href` du `#video-cta` + l'`<iframe>` du `.video-wrap`)
-   - Le bloc `<script type="text/markdown" id="seance-markdown">` : coller le markdown de la fiche
-   - La navigation bas de page (`.seance-nav`)
+   - `<body data-seance-id="acte-X-seance-Y">` (utilisé par localStorage)
+   - Le breadcrumb (`Séance Y`)
+   - Le badge `.hero-acte-tag` (si autre acte, adapter le texte)
+   - `<h1 class="hero-title">` titre de la séance + `.hero-accroche` accroche
+   - `.hero-meta-row` : durée, animateur, format
+   - Le `<div class="video-wrap-v2">` : remplacer le placeholder par `<iframe src="URL_TELLA" ...></iframe>`
+   - Le `.callout-retenir-v2` : la synthèse en 3-4 lignes
 
-3. **Activer la carte sur l'index** :
-   Dans `index.html`, remplacer la div `data-status="soon"` correspondante par un `<a>` cliquable :
-   ```html
-   <a href="seances/acte-0-seance-2.html" class="seance-card" data-status="available" ...>
-     ...
-     <span class="card-status" data-status="available">Disponible</span>
-     ...
-   </a>
-   ```
+3. **Adapter les sections au contenu de la séance**.
+   Tu peux librement piocher dans les composants ci-dessus, en supprimer, en ajouter. Le but : rester visuellement riche pour le screen recording.
 
-   Pense à ajouter la `<label class="card-checkbox">` et le `<span class="card-cta">` comme sur la séance 1.
+4. **Mettre à jour la nav bas** (`.seance-nav`) avec les vraies séances précédente/suivante.
+
+5. **Activer la carte sur l'index** (`index.html`) :
+   - Trouver la div `data-seance-id="acte-X-seance-Y"` correspondante
+   - La transformer de `<div data-status="soon">` en `<a href="seances/..." data-status="available">` avec `class="seance-card"`
+   - Changer `<span class="card-status" data-status="soon">À venir</span>` en `data-status="available">Disponible`
+   - Ajouter le `<div class="card-foot">` avec checkbox + CTA "Ouvrir →" (voir séance 1 comme modèle)
 
 ---
 
-## Conventions du markdown des fiches
+## Convention des IDs (`data-seance-id`)
 
-Le rendu reconnaît automatiquement deux blocs spéciaux :
+- `acte-0-seance-1` ... `acte-0-seance-3`
+- `acte-1-seance-1` ... `acte-1-seance-4`
+- `acte-2-seance-1` ... `acte-2-seance-12`
+- `acte-3-seance-1` ... `acte-3-seance-8`
 
-- **Encadré "À retenir"** : commence par `## À retenir ...` (sera enveloppé dans un cadre violet)
-- **Encadré "Exercice"** : commence par `## Exercice ...` (sera enveloppé dans un cadre orange)
-
-Tout le reste suit le markdown standard : `#`, `##`, `###`, listes, tableaux, citations `>`, gras `**`, italique `*`.
+Ces IDs sont la clé de tout : progression localStorage, checklist actions, mark-as-seen.
 
 ---
 
@@ -84,14 +108,23 @@ Tout le reste suit le markdown standard : `#`, `##`, `###`, listes, tableaux, ci
 | Fond cartes      | `#13111F`         |
 | Accent primaire  | `#6B5BFF` (violet)|
 | Accent secondaire| `#C8FF57` (lime)  |
+| Accent orange    | `#FF9D5C`         |
 | Texte principal  | `#FFFFFF`         |
-| Polices          | Syne 700/800 (titres) · DM Sans 300/400/500/700 (corps) |
+| Polices          | Manrope (titres séance) · DM Sans (corps) · Syne (logo) |
 
 ---
 
-## Local
+## Déploiement
 
-Pas de build. Pour tester en local :
+Push sur `main` → GitHub Pages déploie automatiquement.
+
+Settings → Pages : *Deploy from branch* → `main` / `/` (root).
+
+URL : https://denemacademy1.github.io/academy-formations/
+
+---
+
+## Test local
 
 ```bash
 python3 -m http.server 8000
