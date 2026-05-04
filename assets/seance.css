@@ -1994,6 +1994,218 @@
 }
 
 /* =========================================================
+   QUESTIONS NUMÉROTÉES — exercice introspectif (Partie 2 S1)
+   ========================================================= */
+.questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.2vw, 14px);
+}
+.question-item {
+  display: grid;
+  grid-template-columns: clamp(48px, 5vw, 56px) 1fr;
+  gap: clamp(16px, 1.8vw, 22px);
+  align-items: start;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: clamp(18px, 2vw, 24px) clamp(20px, 2.4vw, 28px);
+  transition: all .3s cubic-bezier(.2, .9, .3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.question-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 0% 0%, rgba(107, 91, 255, 0.10), transparent 50%);
+  opacity: 0;
+  transition: opacity .3s;
+  pointer-events: none;
+}
+.question-item:hover {
+  border-color: rgba(107, 91, 255, 0.4);
+  background: var(--card-hover);
+  transform: translateX(4px);
+}
+.question-item:hover::before { opacity: 1; }
+
+.question-num {
+  width: clamp(40px, 4.4vw, 48px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--primary-soft);
+  border: 2px solid rgba(107, 91, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  color: var(--primary);
+  flex-shrink: 0;
+  transition: all .35s cubic-bezier(.2, .9, .3, 1.3);
+  margin-top: 4px;
+}
+.question-item:hover .question-num {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  box-shadow: 0 0 24px var(--primary-glow);
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.question-content { min-width: 0; }
+.question-title {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 16.5px;
+  letter-spacing: -0.005em;
+  line-height: 1.4;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.question-hint {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.55;
+  font-style: italic;
+}
+.question-hint strong { color: var(--text); font-style: normal; font-weight: 600; }
+
+/* =========================================================
+   CALLOUT WARNING — "À faire absolument"
+   ========================================================= */
+.callout-warning {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 157, 92, 0.08) 0%, rgba(107, 91, 255, 0.06) 100%);
+  border: 1px solid rgba(255, 157, 92, 0.30);
+  border-left: 4px solid var(--orange);
+  border-radius: clamp(12px, 1.4vw, 18px);
+  padding: clamp(22px, 2.6vw, 32px);
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: clamp(18px, 2vw, 28px);
+  align-items: start;
+  overflow: hidden;
+}
+.callout-warning::after {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 200px; aspect-ratio: 1;
+  background: var(--orange);
+  filter: blur(80px);
+  opacity: 0.15;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.callout-warning-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--orange), #ffbe7a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 24px rgba(255, 157, 92, 0.4);
+  position: relative;
+  z-index: 1;
+}
+.callout-warning-content { position: relative; z-index: 1; }
+.callout-warning-content .label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+.callout-warning-content p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+}
+.callout-warning-content p strong { color: var(--text); }
+
+/* =========================================================
+   CALLOUT CONTINUITÉ — petit, en haut de page
+   ========================================================= */
+.callout-continuity {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(107, 91, 255, 0.08);
+  border: 1px solid rgba(107, 91, 255, 0.25);
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.85);
+}
+.callout-continuity-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--primary-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.callout-continuity strong { color: var(--text); font-weight: 600; }
+.callout-continuity a {
+  color: var(--secondary);
+  text-decoration: underline;
+  text-decoration-color: rgba(200, 255, 87, 0.4);
+  text-underline-offset: 3px;
+}
+.callout-continuity a:hover { text-decoration-color: var(--secondary); }
+
+/* =========================================================
+   HERO VARIANT — Partie (sub-séance) — gradient violet renforcé
+   ========================================================= */
+.seance-hero-v2.is-partie .orb-1 { opacity: 0.55; }
+.seance-hero-v2.is-partie .orb-2 { opacity: 0.10; }
+.seance-hero-v2.is-partie .orb-3 { opacity: 0.10; }
+.seance-hero-v2.is-partie::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 70% at 30% 30%, rgba(107, 91, 255, 0.18), transparent 65%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-partie-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--primary-soft);
+  border: 1px solid rgba(107, 91, 255, 0.3);
+  padding: 5px 12px;
+  border-radius: 99px;
+  margin-left: 10px;
+}
+
+.hero-subtitle {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  font-size: clamp(18px, 1.7vw, 22px);
+  color: var(--text-dim);
+  letter-spacing: -0.01em;
+  margin-top: -8px;
+  margin-bottom: 18px;
+}
+.hero-subtitle .grad { font-weight: 700; }
+
+/* =========================================================
    FLOATING ACTION BAR (sticky bottom-right)
    ========================================================= */
 .floating-actions {
