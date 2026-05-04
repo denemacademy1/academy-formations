@@ -97,13 +97,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .brand-logo {
   display: block;
-  height: 38px;
+  height: clamp(44px, 4.2vw, 56px);
   width: auto;
-  filter: drop-shadow(0 0 14px rgba(107, 91, 255, 0.18));
+  filter: drop-shadow(0 0 16px rgba(107, 91, 255, 0.22));
 }
 
 @media (max-width: 640px) {
-  .brand-logo { height: 32px; }
+  .brand-logo { height: 40px; }
 }
 
 .header-nav {
