@@ -232,6 +232,110 @@
     document.head.appendChild(s);
   })();
 
+  /* ===== Quizz interactif ===== */
+  const QUIZZ_STORAGE_KEY = 'denem-quizz-scores';
+
+  function setupQuizz() {
+    const wraps = document.querySelectorAll('[data-quizz]');
+    wraps.forEach((wrap) => {
+      const questions = Array.from(wrap.querySelectorAll('.quizz-q'));
+      const total = questions.length;
+      if (!total) return;
+      let answered = 0;
+      let correct = 0;
+
+      const fillEl = wrap.querySelector('.quizz-progress-fill');
+      const countEl = wrap.querySelector('.quizz-progress-count');
+      const resultEl = wrap.querySelector('[data-quizz-result]');
+
+      function refresh() {
+        if (fillEl) fillEl.style.width = (answered / total) * 100 + '%';
+        if (countEl) countEl.textContent = `${answered} / ${total}`;
+        if (answered === total) showResult();
+      }
+
+      function showResult() {
+        if (!resultEl) return;
+        const pct = Math.round((correct / total) * 100);
+        let msg;
+        if (pct === 100) msg = 'Score parfait. Tu as tout intégré — passe à la séance suivante.';
+        else if (pct >= 80) msg = 'Excellent. Le mindset est en place.';
+        else if (pct >= 60) msg = 'Bien. Relis les sections où tu as buté avant la séance 2.';
+        else msg = 'Reprends la séance — ces points sont les fondations de tout le programme.';
+
+        resultEl.innerHTML = `
+          <div class="quizz-result-eyebrow">Résultat du quizz</div>
+          <div class="quizz-result-score">${correct} / ${total}</div>
+          <div class="quizz-result-pct">${pct} % de bonnes réponses</div>
+          <div class="quizz-result-message">${msg}</div>
+          <button class="quizz-retry-btn" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            Recommencer le quizz
+          </button>
+        `;
+        resultEl.classList.add('visible');
+        const retry = resultEl.querySelector('.quizz-retry-btn');
+        if (retry) retry.addEventListener('click', resetQuizz);
+
+        // Sauvegarde du score
+        try {
+          const scores = JSON.parse(localStorage.getItem(QUIZZ_STORAGE_KEY) || '{}');
+          const seanceId = document.body.dataset.seanceId || 'unknown';
+          scores[seanceId] = { score: correct, total, pct, at: Date.now() };
+          localStorage.setItem(QUIZZ_STORAGE_KEY, JSON.stringify(scores));
+        } catch (e) { /* noop */ }
+
+        // Confettis si score > 80%
+        if (pct >= 80 && typeof triggerConfetti === 'function') {
+          setTimeout(triggerConfetti, 250);
+        }
+      }
+
+      function resetQuizz() {
+        answered = 0;
+        correct = 0;
+        questions.forEach((q) => {
+          q.classList.remove('is-answered', 'is-correct', 'is-wrong');
+          q.querySelectorAll('.quizz-opt').forEach((o) => {
+            o.disabled = false;
+            o.classList.remove('is-correct', 'is-wrong');
+          });
+        });
+        if (resultEl) {
+          resultEl.classList.remove('visible');
+          resultEl.innerHTML = '';
+        }
+        refresh();
+        const first = wrap.querySelector('.quizz-q');
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      questions.forEach((q) => {
+        const correctAns = q.dataset.correct;
+        const opts = Array.from(q.querySelectorAll('.quizz-opt'));
+        opts.forEach((opt) => {
+          opt.addEventListener('click', () => {
+            if (q.classList.contains('is-answered')) return;
+            q.classList.add('is-answered');
+            const chosen = opt.dataset.opt;
+            const isCorrect = chosen === correctAns;
+            opts.forEach((o) => {
+              o.disabled = true;
+              if (o.dataset.opt === correctAns) o.classList.add('is-correct');
+              else if (o === opt) o.classList.add('is-wrong');
+            });
+            q.classList.add(isCorrect ? 'is-correct' : 'is-wrong');
+            answered++;
+            if (isCorrect) correct++;
+            refresh();
+          });
+        });
+      });
+
+      refresh();
+    });
+  }
+
   /* ===== Floating action bar (apparait quand on scroll) ===== */
   function setupFloatingActions() {
     const bar = document.querySelector('.floating-actions');
@@ -324,6 +428,7 @@
     setupTabs();
     setupSteps();
     setupActionsChecklist();
+    setupQuizz();
     setupFloatingActions();
     setupReveal();
   });

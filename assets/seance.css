@@ -1156,6 +1156,314 @@
 }
 
 /* =========================================================
+   QUIZZ — interactif avec feedback immédiat + score
+   ========================================================= */
+.quizz-wrap {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.quizz-wrap::before {
+  content: '';
+  position: absolute;
+  top: -120px; left: -80px;
+  width: 320px; height: 320px;
+  background: var(--primary);
+  filter: blur(140px);
+  opacity: 0.10;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.quizz-progress {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.quizz-progress-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.quizz-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.quizz-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 99px;
+  transition: width .55s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0 0 12px var(--primary-glow);
+}
+.quizz-progress-count {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  min-width: 50px;
+  text-align: right;
+}
+
+.quizz-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+}
+
+.quizz-q {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 26px;
+  transition: all .4s cubic-bezier(.4, 0, .2, 1);
+}
+.quizz-q.is-correct {
+  border-color: rgba(200, 255, 87, 0.35);
+  background: rgba(200, 255, 87, 0.04);
+  box-shadow: 0 0 0 1px rgba(200, 255, 87, 0.18);
+}
+.quizz-q.is-wrong {
+  border-color: rgba(255, 107, 107, 0.35);
+  background: rgba(255, 107, 107, 0.03);
+}
+
+.quizz-q-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.quizz-q-num {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: var(--primary);
+  background: var(--primary-soft);
+  padding: 5px 10px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all .3s;
+}
+.quizz-q.is-correct .quizz-q-num {
+  color: var(--bg);
+  background: var(--secondary);
+}
+.quizz-q.is-wrong .quizz-q-num {
+  color: white;
+  background: #ff6b6b;
+}
+.quizz-q-title {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 17.5px;
+  line-height: 1.4;
+  color: var(--text);
+  flex: 1;
+}
+
+.quizz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.quizz-opt {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 50px 14px 18px;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--text);
+  cursor: pointer;
+  transition: all .25s cubic-bezier(.4, 0, .2, 1);
+  position: relative;
+  line-height: 1.4;
+}
+.quizz-opt:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-strong);
+  transform: translateX(4px);
+}
+.quizz-opt:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+.quizz-opt.is-correct {
+  background: rgba(200, 255, 87, 0.10);
+  border-color: var(--secondary);
+  color: var(--secondary);
+  font-weight: 600;
+  opacity: 1;
+}
+.quizz-opt.is-wrong {
+  background: rgba(255, 107, 107, 0.07);
+  border-color: rgba(255, 107, 107, 0.4);
+  color: #ff8c8c;
+  opacity: 1;
+}
+.quizz-opt.is-correct::after,
+.quizz-opt.is-wrong::after {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  animation: badge-pop .35s cubic-bezier(.5, 1.7, .5, 1);
+}
+.quizz-opt.is-correct::after {
+  content: '✓';
+  background: var(--secondary);
+  color: var(--bg);
+}
+.quizz-opt.is-wrong::after {
+  content: '✕';
+  background: #ff6b6b;
+  color: white;
+}
+@keyframes badge-pop {
+  0% { transform: translateY(-50%) scale(0); }
+  60% { transform: translateY(-50%) scale(1.2); }
+  100% { transform: translateY(-50%) scale(1); }
+}
+
+.quizz-feedback {
+  display: none;
+  margin-top: 16px;
+  padding: 14px 18px;
+  background: rgba(107, 91, 255, 0.07);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 10px 10px 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+.quizz-q.is-correct .quizz-feedback {
+  background: rgba(200, 255, 87, 0.06);
+  border-left-color: var(--secondary);
+}
+.quizz-q.is-wrong .quizz-feedback {
+  background: rgba(255, 107, 107, 0.05);
+  border-left-color: #ff6b6b;
+}
+.quizz-q.is-answered .quizz-feedback {
+  display: block;
+  animation: quizz-feedback-in .4s cubic-bezier(.4, 0, .2, 1);
+}
+@keyframes quizz-feedback-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Résultat final */
+.quizz-result {
+  display: none;
+  margin-top: 28px;
+  padding: 36px 32px;
+  background: linear-gradient(135deg, rgba(107, 91, 255, 0.12), rgba(200, 255, 87, 0.08));
+  border: 1px solid rgba(107, 91, 255, 0.3);
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.quizz-result.visible {
+  display: block;
+  animation: result-in .5s cubic-bezier(.4, 0, .2, 1);
+}
+@keyframes result-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.quizz-result-eyebrow {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-bottom: 14px;
+}
+.quizz-result-score {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: clamp(48px, 8vw, 76px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  background: linear-gradient(120deg, var(--primary) 0%, var(--secondary) 50%, var(--primary) 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: title-shimmer 5s ease-in-out infinite;
+}
+.quizz-result-pct {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+.quizz-result-message {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 1.4;
+  color: var(--text);
+  margin-bottom: 24px;
+  max-width: 36ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.quizz-retry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all .25s;
+}
+.quizz-retry-btn:hover {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
    FLOATING ACTION BAR (sticky bottom-right)
    ========================================================= */
 .floating-actions {
@@ -1273,6 +1581,12 @@
   .step-num { width: 36px; height: 36px; font-size: 16px; }
 
   .action-item { padding: 18px 20px; grid-template-columns: 32px 1fr auto; gap: 14px; }
+
+  .quizz-wrap { padding: 24px 20px; }
+  .quizz-q { padding: 20px 18px; }
+  .quizz-q-title { font-size: 16px; }
+  .quizz-opt { font-size: 14.5px; padding: 12px 44px 12px 14px; }
+  .quizz-result { padding: 28px 22px; }
 
   .floating-actions { bottom: 16px; right: 16px; left: 16px; }
   .float-btn { justify-content: center; }
